@@ -1,0 +1,19 @@
+#dataForm {
+    width: 50%;
+    padding-bottom: 30px;
+}
+#tasksTable {
+    font-style: italic;
+    font-weight: bold;
+}
+body {
+    background: url("/imgs/honeydew.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+main {
+    margin: 0 auto;
+    align: : center;
+}
