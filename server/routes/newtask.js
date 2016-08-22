@@ -58,17 +58,20 @@ router.post('/', function(req, res) {
     //updateTask (previously: item) is an object you received from the client
     //Check what you're sending on the client
     var updateTask = req.body;
-    console.log("reached router.post request. item: ", updateTask);
+    console.log("reached router.post request. task: ", updateTask);
 
     pg.connect(connectionString, function(err, client, done) {
         if (err) {
             res.sendStatus(500);
             console.log("\n \n \n \n!!!ERROR!!!\n error in router.post, pg.connect ", err, "\n \n \n \n");
         }
+        console.log('successfully reached router.post pg.connect request');
 
-        client.query('INSERT INTO todolist (newTask) ' + // case sensitive
-            'VALUES ($1)', [updateTask.newTask], //case sensitive
+        client.query('INSERT INTO todolist (newtask) ' + // case sensitive
+            'VALUES ($1)', [updateTask.newtask], //case sensitive
             function(err, result) {
+                console.log('updatetask.newtask: ', updateTask.newtask);
+                console.log('updatedTask: ', updateTask);
                 done();
 
                 if (err) {
@@ -77,6 +80,7 @@ router.post('/', function(req, res) {
                 }
                 // res.send(result.rows);
                 res.sendStatus(201);
+                console.log('successfully completed router.post client.query request');
             });
     });
 });
@@ -123,9 +127,9 @@ router.put('/:id', function(req, res) {
         }
 
         client.query('UPDATE todolist ' +
-            'SET newTask = $1 ' +
+            'SET newtask = $1 ' +
             // 'completedItem = $2 ' +
-            'WHERE id = $2', [rowValue.newTask, id],
+            'WHERE id = $2', [rowValue.newtask, id],
             function(err, result) {
                 done();
 
